@@ -1,0 +1,2 @@
+# Project Domain
+Our team wants to build a study group sign-up application that helps students find and join study groups for their courses. Students can browse active study groups or create their own. Organizers can select the subject, time, place, number of people that can attend the session. It interests the Computing for the common good by making it easier for students to collaborate and receive support academically.

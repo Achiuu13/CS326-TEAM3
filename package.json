@@ -1,0 +1,24 @@
+{
+  "name": "cs326-team3",
+  "version": "1.0.0",
+  "description": "|Name|GitHub Username| |----|---------------| |Anthony Chiu | AChiuu13| |Abhisheha Muthuswamy | abhishehamut|",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Achiuu13/CS326-TEAM3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Achiuu13/CS326-TEAM3/issues"
+  },
+  "homepage": "https://github.com/Achiuu13/CS326-TEAM3#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/Achiuu13/CS326-TEAM3#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "morgan": "^1.11.0"
   }
 }

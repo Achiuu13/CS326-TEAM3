@@ -4,9 +4,13 @@
 <head>
     <title>Study Groups</title>
 </head>
-
 <body>
 <h1>Study Groups</h1>
-//Needs to be completed
+<ul>
+    <% groups.forEach(function(group) { %>
+        <li><%= group.subject %> - <%= group.time %> at <%= group.place %> (capacity: <%= group.capacity %>)</li>
+    <% }); %>
+</ul>
+<a href="/groups/new">Create a new group</a>
 </body>
 </html>

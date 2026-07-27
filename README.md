@@ -46,3 +46,35 @@ http://localhost:3000
 ```
 
 You should successfully see the StudyHub home page and landing.
+
+## Sprint 2
+Sprint 2 implements a layered architecture for the StudyHub application using routes, controllers, services, and repositories. Users can create a study group by filling out a form with the subject, meeting time, location, and capacity. The application validates the input, stores the study group in studyGroups.json, and redirects the user to the study groups page where all saved groups are displayed.
+
+## System Diagram
+```text
+Browser
+   │ GET /groups/new
+   v
+Routes(studyGroupRoutes.js)
+   │
+   v
+Controller(studyGroupController.js)
+   │
+   v
+Service(studyGroupService.js)
+   │
+   v
+Repository(studyGroupRepository.js)
+   │
+   v
+studyGroups.json
+   │
+   v
+Controller
+   │
+   v
+Redirect to GET /groups
+   │
+   v
+Render groups.ejs page
+```

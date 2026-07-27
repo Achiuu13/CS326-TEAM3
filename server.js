@@ -14,6 +14,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use("/groups", studyGroupRouter);
 
+app.get("/", (req, res) => {
+  res.redirect("/groups");
+});
+
+app.use((req, res) => {
+  res.status(404).send("Page not found.");
+});
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send("Something went wrong.");
+});
+
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });

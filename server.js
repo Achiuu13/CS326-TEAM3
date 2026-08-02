@@ -1,9 +1,15 @@
 import express from "express";
+import mongoose from "mongoose";
 import morgan from "morgan";
 import studyGroupRouter from "./routes/studyGroupRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+await mongoose.connect(
+  process.env.MONGODB_URI ||
+  "mongodb://localhost:27017/devdb"
+);
 
 app.set("view engine", "ejs");
 app.set("views", "views");

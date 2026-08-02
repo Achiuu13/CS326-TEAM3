@@ -1,12 +1,20 @@
-import { readFile, writeFile } from "fs/promises";
+import mongoose from "mongoose";
 
-const DATA_FILE = "studyGroups.json";
+const studyGroupSchema = new mongoose.Schema(
+  {
+    subject: {type: String, required: true},
+    time: {type: String, required: true},
+    place: {type: String, required: true},
+    capacity: {type: Number, required: true}
+  },
+  { timestamps: true }
+);
 
-export const getAll = async () => {
-  const data = await readFile(DATA_FILE, "utf-8");
-  return JSON.parse(data);
-};
+const StudyGroup = mongoose.model("StudyGroup", studyGroupSchema);
 
-export const save = async (groups) => {
-  await writeFile(DATA_FILE, JSON.stringify(groups, null, 2));
-};
+export const isValidId = (id) => mongoose.Types.ObjectId.isValid(id);
+export const getAll = async () => StudyGroup.find().lean();
+export const findById = async (id) => StudyGroup.findById(id).lean();
+export const create = async (data) => (await StudyGroup.create(data)).toObject();
+export const updateById = async (id, data) => StudyGroup.findByIdAndUpdate(id, data, { new: true }).lean();
+export const removeById = async (id) => {await StudyGroup.findByIdAndDelete(id);};

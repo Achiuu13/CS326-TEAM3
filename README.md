@@ -78,3 +78,9 @@ Redirect to GET /groups
    v
 Render groups.ejs page
 ```
+
+## Sprint 3 Progress
+
+Service Validation: Added trimming to prevent whitespace inputs and modified capacity validation to reject invalid non-numeric inputs, zero, and negative values.
+MongoDB Repository: Replaced JSON file storage with a MongoDB repository and updated existing repository to use MongoDB CRUD methods.
+Jest Tests: Added Jest tests for the service layer validation rules and successful group creation. Run tests with npm test.

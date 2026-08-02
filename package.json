@@ -4,7 +4,8 @@
   "description": "|Name|GitHub Username| |----|---------------| |Anthony Chiu | AChiuu13| |Abhisheha Muthuswamy | abhishehamut|",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,14 @@
   "bugs": {
     "url": "https://github.com/Achiuu13/CS326-TEAM3/issues"
   },
-  "homepage": "https://github.com/Achiuu13/CS326-TEAM3#readme",
+  "homepage": "https://github.com/AChiuu13/CS326-TEAM3#readme",
   "dependencies": {
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "mongoose": "^9.9.1",
     "morgan": "^1.11.0"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2"
   }
 }

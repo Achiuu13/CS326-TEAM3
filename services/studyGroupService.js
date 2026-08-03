@@ -1,5 +1,5 @@
 import { Ok, Err } from "../result.js";
-import { getAll, create } from "../repositories/studyGroupRepository.js";
+import { getAll, create, findById, removeById } from "../repositories/studyGroupRepository.js";
 
 const validateGroup = ({ subject, time, place, capacity }) => {
   subject = subject?.trim();
@@ -25,3 +25,12 @@ export const createGroup = async (data) => {
   const group = await create(result.value);
   return Ok(group);
 };
+
+export const removeGroup = async (id) => {
+  const existing = await findById(id);
+  if(!existing){
+    return err({ status: 404, message: "Study group not found."});
+  }
+  await removeById(id);
+  return Ok(null)
+}

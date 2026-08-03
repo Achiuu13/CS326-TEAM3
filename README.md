@@ -67,13 +67,10 @@ Service(studyGroupService.js)
 Repository(studyGroupRepository.js)
    │
    v
-studyGroups.json
+MongoDB
    │
    v
 Controller
-   │
-   v
-Redirect to GET /groups
    │
    v
 Render groups.ejs page
@@ -84,3 +81,5 @@ Render groups.ejs page
 Service Validation: Added trimming to prevent whitespace inputs and modified capacity validation to reject invalid non-numeric inputs, zero, and negative values.
 MongoDB Repository: Replaced JSON file storage with a MongoDB repository and updated existing repository to use MongoDB CRUD methods.
 Jest Tests: Added Jest tests for the service layer validation rules and successful group creation. Run tests with npm test.
+HTMX Delete: Added an HTMX-powered delete button to the groups page that removes a group without a page reload.
+Tailwind: Installed Tailwind and restyled the header with responsive classes. Run npm run build:css to rebuild styles

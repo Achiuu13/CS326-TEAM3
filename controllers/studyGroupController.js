@@ -1,4 +1,5 @@
 import * as studyGroupService from "../services/studyGroupService.js";
+import { isValidId } from "../repositories/studyGroupRepository.js";
 
 export const index = async (req, res) => {
   const groups = await studyGroupService.listGroups();
@@ -21,3 +22,17 @@ export const create = async (req, res) => {
   }
   res.redirect("/groups");
 };
+
+export const remove = async (req, res) => {
+  const { id } = req.params;
+  if(!isValidId(id)){
+    res.status(400).send("id must be valid id");
+    return;
+  }
+  const result = await studyGroupService.removeGroup(id);
+  if(!result.ok){
+    res.status(result.error.status).send(result.error.message);
+    return;
+  }
+  res.status(200).send("");
+}

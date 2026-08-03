@@ -3,12 +3,24 @@
 
 <head>
     <title>Study Groups</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 <body>
-<h1>Study Groups</h1>
-<ul>
+<header class="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+    <h1>Study Groups</h1>
+</header>
+<ul id="groups">
     <% groups.forEach(function(group) { %>
-        <li><%= group.subject %> - <%= group.time %> at <%= group.place %> (capacity: <%= group.capacity %>)</li>
+        <li>
+            <span><%= group.subject %> - <%= group.time %> at <%= group.place %> (capacity: <%= group.capacity %>)</span>
+            <button
+                hx-delete="/groups/<%= group._id %>"
+                hx-target="closest li"
+                hx-swap="outerHTML"
+                hx-confirm="Delete this group?"
+            >Delete</button>
+        </li>
     <% }); %>
 </ul>
 <a href="/groups/new">Create a new group</a>

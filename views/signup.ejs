@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main>
+        <h1>Sign Up</h1>
+        <% if (error) { %>
+            <p role="alert"><%= error %></p>
+        <% } %>
+        <form action="/auth/signup" method="POST">
+            <div>
+                <label for="email">Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+            </div>
+            <button type="submit">Create account</button>
+        </form>
+        <p>
+            Already have an account?
+            <a href="/auth/login">Log in</a>
+        </p>
+        <p>
+            <a href="/groups">Back to study groups</a>
+        </p>
+    </main>
+</body>
+</html>

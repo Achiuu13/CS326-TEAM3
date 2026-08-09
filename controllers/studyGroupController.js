@@ -4,7 +4,8 @@ import { isValidId } from "../repositories/studyGroupRepository.js";
 export const index = async (req, res) => {
   const groups = await studyGroupService.listGroups();
   res.status(200).render("groups", {
-    title: "Study Groups", groups
+    title: "Study Groups",groups,
+    user: req.user
   });
 };
 

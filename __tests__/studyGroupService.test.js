@@ -2,16 +2,23 @@ import { jest } from "@jest/globals";
 
 const mockGetAll = jest.fn();
 const mockCreate = jest.fn();
+const mockFindById = jest.fn();
+const mockRemoveById = jest.fn();
 jest.unstable_mockModule(
     "../repositories/studyGroupRepository.js",
     () => ({
         getAll: mockGetAll,
-        create: mockCreate
+        create: mockCreate,
+        findById: mockFindById,
+        removeById: mockRemoveById
     })
 );
 
-const {createGroup} = await import("../services/studyGroupService.js");
+const {createGroup, removeGroup} = await import("../services/studyGroupService.js");
 
+beforeEach(() =>{
+    jest.clearAllMocks();
+})
 test("rejects missing subject", async () => {
     const result = await createGroup({
         subject: "",
@@ -78,3 +85,18 @@ test("creates a valid study group", async () => {
     expect(result.ok).toBe(true);
     expect(mockCreate).toHaveBeenCalled();
 });
+
+test("returns 404 when deleting a group that does not exist", async ()=>{
+    mockFindById.mockResolvedValue(null);
+    const res = await removeGroup("1");
+    expect(res.ok).toBe(false);
+    expect(res.error.status).toBe(404);
+    expect(mockRemoveById).not.toHaveBeenCalled();
+});
+
+test("deletes an existing group", async ()=> {
+    mockFindById.mockResolvedValue({_id: "1", subject: "Math"});
+    const res = await removeGroup("1");
+    expect(res.ok).toBe(true);
+    expect(mockRemoveById).toHaveBeenCalled()
+})

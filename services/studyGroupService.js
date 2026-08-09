@@ -29,7 +29,7 @@ export const createGroup = async (data) => {
 export const removeGroup = async (id) => {
   const existing = await findById(id);
   if(!existing){
-    return err({ status: 404, message: "Study group not found."});
+    return Err({ status: 404, message: "Study group not found."});
   }
   await removeById(id);
   return Ok(null)

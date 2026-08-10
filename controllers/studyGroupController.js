@@ -16,7 +16,7 @@ export const showCreateForm = (req, res) => {
 };
 
 export const create = async (req, res) => {
-  const result = await studyGroupService.createGroup(req.body);
+  const result = await studyGroupService.createGroup(req.body, req.user);
   if (!result.ok) {
     res.status(result.error.status).send(result.error.message);
     return;
@@ -30,7 +30,7 @@ export const remove = async (req, res) => {
     res.status(400).send("id must be valid id");
     return;
   }
-  const result = await studyGroupService.removeGroup(id);
+  const result = await studyGroupService.removeGroup(id, req.user);
   if(!result.ok){
     res.status(result.error.status).send(result.error.message);
     return;

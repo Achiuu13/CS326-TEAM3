@@ -15,21 +15,33 @@ const validateGroup = ({ subject, time, place, capacity }) => {
   return Ok({subject, time, place, capacity: capacityNum});
 };
 
+export const isOwnerOrAdmin = (user, group) => user?.role === "admin" || String(group.ownerId) === String(user?.id);
+
+
 export const listGroups = async () => {
   return await getAll();
 };
 
-export const createGroup = async (data) => {
+export const createGroup = async (data, user) => {
   const result = validateGroup(data);
   if (!result.ok) {return result;}
-  const group = await create(result.value);
+  if(!user){
+    return Err({status: 401, message: "You must be logged in."});
+  }
+  const group = await create({...result.value, ownerId: user.id});
   return Ok(group);
 };
 
-export const removeGroup = async (id) => {
+export const removeGroup = async (id, user) => {
+  if(!user){
+    return Err({status: 401, message: "You must be logged in."});
+  }
   const existing = await findById(id);
   if(!existing){
     return Err({ status: 404, message: "Study group not found."});
+  }
+  if(!isOwnerOrAdmin(user, existing)){
+    return Err({status: 403, message: "You can only delete your own study groups."});
   }
   await removeById(id);
   return Ok(null)

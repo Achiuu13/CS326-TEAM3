@@ -50,18 +50,19 @@ You should successfully see the StudyHub home page and landing.
 ## Sprint 2
 Sprint 2 implements a layered architecture for the StudyHub application using routes, controllers, services, and repositories. Users can create a study group by filling out a form with the subject, meeting time, location, and capacity. The application validates the input, stores the study group in studyGroups.json, and redirects the user to the study groups page where all saved groups are displayed.
 
-## System Diagram
-```text
 Browser
    │ GET /groups/new
    v
-Routes(studyGroupRoutes.js)
+attachUser (sets req.user from session)
+   │
+   v
+Routes(studyGroupRoutes.js) - requireLogin gate
    │
    v
 Controller(studyGroupController.js)
    │
    v
-Service(studyGroupService.js)
+Service(studyGroupService.js) - isOwnerOrAdmin check
    │
    v
 Repository(studyGroupRepository.js)
@@ -74,7 +75,6 @@ Controller
    │
    v
 Render groups.ejs page
-```
 
 ## Sprint 3 Progress
 
@@ -98,3 +98,9 @@ Health Check: The application also provides `GET /health` which returns:
   "status": "ok"
 }
 ```
+
+Authorization: enforced in two layers per Unit 18. `requireLogin` gates `Get /groups/new`, `POST /groups`, and `Delete /groups/:id` at the route ("is anyone logged in"). The resource aware check, `isOwnerOrAdmin`, runs inside `studyGroupService.removeGroup` after the record is loaded, returning a real 403. Study groups carry an `ownderId` stamped at creation. To test: create a group as one user, log in as another and try to delete should be refused with a 403. An `admin` can delete any group.
+
+Accessibility: every form control has a real `<label>` tied by `for`/`id`, replacing placeholder-only inputs. Keyboard navigation works end to end with visible focus rings. After an HTMX delete, focus moves to the next remaining button instead of being lost to `<body>`, and the result is announced via `aria-live`. Contrast on buttons, body text, and hover states meets WCAG AA 4.5:1.
+
+Tests: suite now covers the authorization branches (403 for non-owner, admin override, 404 for missing). `npm test` — 10 passing.

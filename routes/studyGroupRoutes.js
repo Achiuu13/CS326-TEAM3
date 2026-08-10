@@ -4,9 +4,9 @@ import { requireLogin } from "../middleware/requireLogin.js"
 
 const router = Router();
 
-router.get('/', studyGroupController.index);
-router.get('/new', studyGroupController.showCreateForm);
-router.post('/', studyGroupController.create);
-router.delete('/:id', studyGroupController.remove);
+router.get('/', studyGroupController.index);              // public is fine
+router.get('/new', requireLogin, studyGroupController.showCreateForm);
+router.post('/', requireLogin, studyGroupController.create);
+router.delete('/:id', requireLogin, studyGroupController.remove);
 
 export default router;

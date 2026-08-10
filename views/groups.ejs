@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Study Groups</title>
     <link rel="stylesheet" href="/style.css">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 <body>
-<header class="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+<header>
     <h1>Study Groups</h1>
+    <% if (user) { %>
+        <p>Logged in as <%= user.email %></p>
+        <form action="/auth/logout" method="POST">
+            <button type="submit">Log out</button>
+        </form>
+    <% } else { %>
+        <nav aria-label="Account">
+            <a href="/auth/login">Log in</a>
+            <a href="/auth/signup">Sign up</a>
+        </nav>
+    <% } %>
 </header>
 <ul id="groups">
     <% groups.forEach(function(group) { %>
         <li>
-            <span><%= group.subject %> - <%= group.time %> at <%= group.place %> (capacity: <%= group.capacity %>)</span>
+            <span>
+                <%= group.subject %> -
+                <%= group.time %> at
+                <%= group.place %>
+                (capacity: <%= group.capacity %>)
+            </span>
             <button
+                type="button"
                 hx-delete="/groups/<%= group._id %>"
                 hx-target="closest li"
                 hx-swap="outerHTML"
                 hx-confirm="Delete this group?"
-            >Delete</button>
+            >
+                Delete
+            </button>
         </li>
     <% }); %>
 </ul>

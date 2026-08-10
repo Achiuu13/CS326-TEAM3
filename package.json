@@ -21,8 +21,11 @@
   },
   "homepage": "https://github.com/AChiuu13/CS326-TEAM3#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^6.0.0",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "mongoose": "^9.9.1",
     "morgan": "^1.11.0"
   },

@@ -83,3 +83,18 @@ MongoDB Repository: Replaced JSON file storage with a MongoDB repository and upd
 Jest Tests: Added Jest tests for the service layer validation rules and successful group creation. Run tests with npm test.
 HTMX Delete: Added an HTMX-powered delete button to the groups page that removes a group without a page reload.
 Tailwind: Installed Tailwind and restyled the header with responsive classes. Run npm run build:css to rebuild styles
+
+## Sprint 4 Progress
+
+Authentication: added session-based authentication. User passwords are securely hashed with `bcrypt` and are never stored as plain text.
+
+Users can now create an account at `/auth/signup`, log in at `/auth/login` and log out as well. The `User` model includes two roles namely `member` and `admin`. New accounts are deliberately assigned the `member` role during signup and there's no option to submit their own role.
+
+Middleware: attaches the currently logged-in user to `req.user` allowing the authorization layer(needs to be completed yet) to determine which user is making a request.
+
+Health Check: The application also provides `GET /health` which returns:
+```json
+{
+  "status": "ok"
+}
+```

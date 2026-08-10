@@ -161,24 +161,7 @@
   }
 }
 @layer utilities {
-  .flex {
-    display: flex;
-  }
-  .flex-col {
-    flex-direction: column;
-  }
-  .gap-2 {
-    gap: calc(var(--spacing) * 2);
-  }
-  @media (width >= 40rem) {
-    .sm\:flex-row {
-      flex-direction: row;
-    }
-    .sm\:items-center {
-      align-items: center;
-    }
-    .sm\:justify-between {
-      justify-content: space-between;
-    }
+  .lowercase {
+    text-transform: lowercase;
   }
 }

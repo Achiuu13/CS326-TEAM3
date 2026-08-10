@@ -5,7 +5,8 @@ const studyGroupSchema = new mongoose.Schema(
     subject: {type: String, required: true},
     time: {type: String, required: true},
     place: {type: String, required: true},
-    capacity: {type: Number, required: true}
+    capacity: {type: Number, required: true},
+    ownerId: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true}
   },
   { timestamps: true }
 );

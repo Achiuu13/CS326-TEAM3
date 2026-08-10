@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 <body>
-<header>
+<header class="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
     <h1>Study Groups</h1>
     <% if (user) { %>
         <p>Logged in as <%= user.email %></p>
@@ -21,27 +21,40 @@
         </nav>
     <% } %>
 </header>
+
+<main>
+<p id="group-status" role="status" aria-live="polite" class="sr-only"></p>
+
 <ul id="groups">
     <% groups.forEach(function(group) { %>
         <li>
-            <span>
-                <%= group.subject %> -
-                <%= group.time %> at
-                <%= group.place %>
-                (capacity: <%= group.capacity %>)
-            </span>
-            <button
-                type="button"
-                hx-delete="/groups/<%= group._id %>"
-                hx-target="closest li"
-                hx-swap="outerHTML"
-                hx-confirm="Delete this group?"
-            >
-                Delete
-            </button>
+            <span><%= group.subject %> - <%= group.time %> at <%= group.place %> (capacity: <%= group.capacity %>)</span>
+            <% if (user && (user.role === "admin" || String(group.ownerId) === String(user.id))) { %>
+                <button type="button"
+                    aria-label="Delete <%= group.subject %> group"
+                    hx-delete="/groups/<%= group._id %>"
+                    hx-target="closest li"
+                    hx-swap="outerHTML"
+                    hx-confirm="Delete this group?">Delete</button>
+            <% } %>
         </li>
     <% }); %>
 </ul>
-<a href="/groups/new">Create a new group</a>
+
+<p><a id="create-group-link" href="/groups/new">Create a new group</a></p>
+</main>
+
+<script>
+document.body.addEventListener("htmx:beforeSwap", function (event) {
+    var removed = event.target.closest("li");
+    if (!removed || !removed.parentElement || removed.parentElement.id !== "groups") return;
+    var sibling = removed.nextElementSibling || removed.previousElementSibling;
+    var next = sibling ? sibling.querySelector("button") : document.getElementById("create-group-link");
+    requestAnimationFrame(function () {
+        document.getElementById("group-status").textContent = "Study group deleted.";
+        if (next) next.focus();
+    });
+});
+</script>
 </body>
 </html>

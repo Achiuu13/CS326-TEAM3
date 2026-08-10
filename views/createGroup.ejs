@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Create Study Group</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-
 <body>
+<main>
 <h1>Create Study Group</h1>
 <form action="/groups" method="POST">
-    <input type="text" name="subject" placeholder="Subject" required>
-    <input type="text" name ="time" placeholder="Time" required>
-    <input type="text" name="place" placeholder="Place" required>
-    <input type="number" name="capacity" placeholder="Capacity" required>
-    <button>Create</button>
+    <label for="subject">Subject</label>
+    <input id="subject" type="text" name="subject" required>
+
+    <label for="time">Time</label>
+    <input id="time" type="text" name="time" required>
+
+    <label for="place">Place</label>
+    <input id="place" type="text" name="place" required>
+
+    <label for="capacity">Capacity</label>
+    <input id="capacity" type="number" name="capacity" min="1" required>
+
+    <button type="submit">Create</button>
 </form>
+<p><a href="/groups">Back to study groups</a></p>
+</main>
 </body>
 </html>

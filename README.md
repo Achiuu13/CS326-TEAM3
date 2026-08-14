@@ -50,6 +50,8 @@ You should successfully see the StudyHub home page and landing.
 ## Sprint 2
 Sprint 2 implements a layered architecture for the StudyHub application using routes, controllers, services, and repositories. Users can create a study group by filling out a form with the subject, meeting time, location, and capacity. The application validates the input, stores the study group in studyGroups.json, and redirects the user to the study groups page where all saved groups are displayed.
 
+## System Diagram
+```text
 Browser
    │ GET /groups/new
    v
@@ -75,6 +77,7 @@ Controller
    │
    v
 Render groups.ejs page
+```
 
 ## Sprint 3 Progress
 
@@ -90,7 +93,7 @@ Authentication: added session-based authentication. User passwords are securely 
 
 Users can now create an account at `/auth/signup`, log in at `/auth/login` and log out as well. The `User` model includes two roles namely `member` and `admin`. New accounts are deliberately assigned the `member` role during signup and there's no option to submit their own role.
 
-Middleware: attaches the currently logged-in user to `req.user` allowing the authorization layer(needs to be completed yet) to determine which user is making a request.
+Middleware: attaches the currently logged-in user to `req.user` allowing the authorization layer to determine which user is making a request.
 
 Health Check: The application also provides `GET /health` which returns:
 ```json
@@ -99,8 +102,8 @@ Health Check: The application also provides `GET /health` which returns:
 }
 ```
 
-Authorization: enforced in two layers per Unit 18. `requireLogin` gates `Get /groups/new`, `POST /groups`, and `Delete /groups/:id` at the route ("is anyone logged in"). The resource aware check, `isOwnerOrAdmin`, runs inside `studyGroupService.removeGroup` after the record is loaded, returning a real 403. Study groups carry an `ownderId` stamped at creation. To test: create a group as one user, log in as another and try to delete should be refused with a 403. An `admin` can delete any group.
+Authorization: enforced in two layers per Unit 18. `requireLogin` gates `GET /groups/new`, `POST /groups`, and `DELETE /groups/:id` at the route ("is anyone logged in"). The resource aware check, `isOwnerOrAdmin`, runs inside `studyGroupService.removeGroup` after the record is loaded, returning a real 403. Study groups carry an `ownerId` stamped at creation. To test: create a group as one user, log in as another and try to delete should be refused with a 403. An `admin` can delete any group.
 
-Accessibility: every form control has a real `<label>` tied by `for`/`id`, replacing placeholder-only inputs. Keyboard navigation works end to end with visible focus rings. After an HTMX delete, focus moves to the next remaining button instead of being lost to `<body>`, and the result is announced via `aria-live`. Contrast on buttons, body text, and hover states meets WCAG AA 4.5:1.
+Accessibility: every form control has a real `<label>` tied by `for`/`id`, replacing placeholder-only inputs. After an HTMX delete, focus moves to the next remaining button instead of being lost to `<body>`, and the result is announced via `aria-live`. Each delete button carries an `aria-label` naming its group.
 
 Tests: suite now covers the authorization branches (403 for non-owner, admin override, 404 for missing). `npm test` — 10 passing.

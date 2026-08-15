@@ -61,6 +61,10 @@ You should successfully see the StudyHub home page and landing.
 
 All 10 tests should pass.
 
+## Seeding the database
+
+This project does not require seed data. The database starts empty. You create an account at `/auth/signup` and add study groups through the application itself.
+
 ## Sprint 2
 Sprint 2 implements a layered architecture for the StudyHub application using routes, controllers, services, and repositories. Users can create a study group by filling out a form with the subject, meeting time, location, and capacity. The application validates the input, stores the study group in studyGroups.json, and redirects the user to the study groups page where all saved groups are displayed.
 

@@ -53,7 +53,7 @@ Sprint 2 implements a layered architecture for the StudyHub application using ro
 ## System Diagram
 ```text
 Browser
-   │ GET /groups/new
+   │ GET POST /groups
    v
 attachUser (sets req.user from session)
    │

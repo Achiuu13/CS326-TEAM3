@@ -14,7 +14,7 @@
 
 # About This Project
 
-Our team wants to build a study group sign-up application that helps students find and join study groups for their courses. Students can browse active study groups or create their own. Organizers can select the subject, time, and place, and the number of people that can attend the session. It supports Computing for the common good by making it easier for students to collaborate and receive support academically outside the classroom.
+Our team wants to build a study group sign-up application that helps students find and organize study groups for their courses. Students can browse active study groups or create their own. Organizers can select the subject, time, and place, and the number of people that can attend the session. It supports Computing for the common good by making it easier for students to collaborate and receive support academically outside the classroom.
 
 # Installation and Setup
 
@@ -35,17 +35,35 @@ To run this project locally:
   npm install
 ```
 
-4. Start the server:
+4. Make sure MongoDB is running. This project connects to a local MongoDB instance
+
+5. Build the CSS:
+```
+   npm run build:css
+```
+
+6. Start the server:
 ```
   node server.js
 ```
 
-5. Open your browser and visit:
+7. Open your browser and visit:
 ```
 http://localhost:3000
 ```
 
 You should successfully see the StudyHub home page and landing.
+
+## Running the tests
+```
+   npm test
+```
+
+All 10 tests should pass.
+
+## Seeding the database
+
+This project does not require seed data. The database starts empty. You create an account at `/auth/signup` and add study groups through the application itself.
 
 ## Sprint 2
 Sprint 2 implements a layered architecture for the StudyHub application using routes, controllers, services, and repositories. Users can create a study group by filling out a form with the subject, meeting time, location, and capacity. The application validates the input, stores the study group in studyGroups.json, and redirects the user to the study groups page where all saved groups are displayed.
@@ -53,7 +71,7 @@ Sprint 2 implements a layered architecture for the StudyHub application using ro
 ## System Diagram
 ```text
 Browser
-   │ GET /groups/new
+   │ POST /groups
    v
 attachUser (sets req.user from session)
    │

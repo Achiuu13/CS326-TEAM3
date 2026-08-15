@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+input, select, textarea {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+button {
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 4px 12px;
+  background: white;
+  cursor: pointer;
+}
+
+body{
+  padding: 24px;
+  max-width: 700px
+}

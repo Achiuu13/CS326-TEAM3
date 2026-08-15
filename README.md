@@ -14,7 +14,7 @@
 
 # About This Project
 
-Our team wants to build a study group sign-up application that helps students find and join study groups for their courses. Students can browse active study groups or create their own. Organizers can select the subject, time, and place, and the number of people that can attend the session. It supports Computing for the common good by making it easier for students to collaborate and receive support academically outside the classroom.
+Our team wants to build a study group sign-up application that helps students find and organize study groups for their courses. Students can browse active study groups or create their own. Organizers can select the subject, time, and place, and the number of people that can attend the session. It supports Computing for the common good by making it easier for students to collaborate and receive support academically outside the classroom.
 
 # Installation and Setup
 

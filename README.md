@@ -36,18 +36,16 @@ To run this project locally:
 ```
 
 4. Make sure MongoDB is running. This project connects to a local MongoDB instance
-
-5. Build the CSS:
 ```
-   npm run build:css
+   dc-up mongo
 ```
 
-6. Start the server:
+5. Start the application:
 ```
-  node server.js
+   npm run dev
 ```
 
-7. Open your browser and visit:
+6. Open your browser and visit:
 ```
 http://localhost:3000
 ```
@@ -64,6 +62,15 @@ All 10 tests should pass.
 ## Seeding the database
 
 This project does not require seed data. The database starts empty. You create an account at `/auth/signup` and add study groups through the application itself.
+
+## Environment variables
+
+All four have working defaults so the application can run from a clean clone
+
+`PORT` - defaults to `3000`.
+`MONGODB_URI` - defaults to `mongodb://dev:devpassword@mongo:27017/devdb?authSource=admin`.
+`SESSION_SECRET` - defaults to `development-only-change-this-secret`.
+`NODE_ENV` - unset by default, set to `production`.
 
 ## Sprint 2
 Sprint 2 implements a layered architecture for the StudyHub application using routes, controllers, services, and repositories. Users can create a study group by filling out a form with the subject, meeting time, location, and capacity. The application validates the input, stores the study group in studyGroups.json, and redirects the user to the study groups page where all saved groups are displayed.
